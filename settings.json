@@ -1,0 +1,27 @@
+{
+    "workbench.sideBar.location": "right",
+    "window.zoomLevel": 0,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["h"],
+            "after": [""]
+        },
+        {
+            "before": ["j"],
+            "after": ["h"]
+        },
+        {
+            "before": ["k"],
+            "after": ["j"]
+        },
+        {
+            "before": ["l"],
+            "after": ["k"]
+        },
+        {
+            "before": [";"],
+            "after": ["l"]
+        },
+    ],
+    "workbench.tree.indent": 24
+}

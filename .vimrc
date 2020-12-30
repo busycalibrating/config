@@ -92,6 +92,7 @@ endif
 
 " Jedi config
 let jedi#show_call_signatures = 0
+let g:jedi#popup_on_dot = 0
 
 " Syntastic
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }

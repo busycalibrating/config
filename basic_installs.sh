@@ -2,7 +2,7 @@
 
 ##### Basics
 sudo apt update && sudo apt upgrade -y
-sudo apt install -y vim git tmux gnome-tweaks htop nvtop
+sudo apt install -y vim git tmux gnome-tweaks htop nvtop ffmpeg
 
 # Python stuff
 sudo apt install python3.9-venv python3-pip python3-virtualenv
@@ -74,7 +74,23 @@ echo Continue...
 read null
 
 
-##### Install Chrome
+##### Install other stuff
 echo \nInstalling Chrome\n
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install -y  ./google-chrome-stable_current_amd64.deb
+
+echo \nInstalling NordVPN...\n
+wget https://repo.nordvpn.com/deb/nordvpn/debian/pool/main/nordvpn-release_1.0.0_all.deb
+sudo apt-get install ./nordvpn-release_1.0.0_all.deb
+sudo apt-get update
+sudo apt-get install nordvpn
+
+
+echo \nInstalling Slack, Discord, VSCode, ...\n
+sudo snap install slack --classic
+sudo snap install discord
+sudo snap install zoom-client
+sudo snap install pomatez
+sudo snap install gimp
+
+echo \nDone. Don't forget dropbox!

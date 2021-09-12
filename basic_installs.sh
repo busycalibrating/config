@@ -73,7 +73,6 @@ echo $ chsh -s /usr/local/bin/fish
 echo Continue...
 read null
 
-
 ##### Install other stuff
 echo \nInstalling Chrome\n
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -85,12 +84,13 @@ sudo apt-get install ./nordvpn-release_1.0.0_all.deb
 sudo apt-get update
 sudo apt-get install nordvpn
 
-
 echo \nInstalling Slack, Discord, VSCode, ...\n
 sudo snap install slack --classic
+sudo snap install code --classic
 sudo snap install discord
 sudo snap install zoom-client
 sudo snap install pomatez
 sudo snap install gimp
+sudo snap install vlc
 
 echo \nDone. Don't forget dropbox!

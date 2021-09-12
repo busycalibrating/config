@@ -2,7 +2,7 @@
 
 ##### Basics
 sudo apt update && sudo apt upgrade -y
-sudo apt install -y vim git tmux gnome-tweaks htop nvtop ffmpeg
+sudo apt install -y vim git tmux gnome-tweaks htop ffmpeg ubuntu-restricted-extras
 
 # Python stuff
 sudo apt install python3.9-venv python3-pip python3-virtualenv

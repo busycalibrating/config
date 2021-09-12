@@ -12,9 +12,11 @@ sudo apt-key add /var/cuda-repo-ubuntu2004-11-4-local/7fa2af80.pub
 sudo apt-get update
 sudo apt-get -y install cuda
 
+echo
 echo Add the following to /etc/environment:
 echo PATH=/usr/local/cuda-11.4/bin${PATH:+:${PATH}}
-echo Make sure to logout to see any changes.
+echo Make sure to logout to see any changes. Continue...
+read null
 
 
 echo Go to https://developer.nvidia.com/rdp/cudnn-download to download CUDNN, and install with $ sudo dpkg -i libcudnn...

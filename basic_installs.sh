@@ -2,10 +2,17 @@
 
 ##### Basics
 sudo apt update && sudo apt upgrade -y
-sudo apt install -y vim git tmux gnome-tweaks
+sudo apt install -y vim git tmux gnome-tweaks htop nvtop
+
+# Python stuff
+sudo apt install python3.9-venv python3-pip python3-virtualenv
+echo \nAdding ppa:deadsnakes/ppa for other python versions if desired.\n
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+
 
 ##### Install Signal
-echo Installing Signal
+echo \nInstalling Signal...\n
 # 1. Install official public software signing key
 wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg
 cat signal-desktop-keyring.gpg | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
@@ -19,7 +26,7 @@ sudo apt update && sudo apt install signal-desktop
 
 
 ##### Install Docker
-echo Installing Docker...
+echo \nInstalling Docker...\n
 # 1. Setup repository
 sudo apt-get remove docker docker-engine docker.io containerd runc
 sudo apt-get update && sudo apt-get install \
@@ -51,5 +58,23 @@ sudo docker run hello-world
 echo Creating docker group...
 sudo groupadd docker
 sudo usermod -aG docker $USER
+echo Logout and login again to re-evaluate group membership. Continue...
+read null
 
-echo Logout and login again to re-evaluate group membership
+
+##### Install Fish
+echo \nInstalling Fish...\n
+sudo apt-add-repository ppa:fish-shell/release-3
+sudo apt-get update
+sudo apt-get install fish
+
+echo Change fish to be the default shell: 
+echo $ chsh -s /usr/local/bin/fish
+echo Continue...
+read null
+
+
+##### Install Chrome
+echo \nInstalling Chrome\n
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install -y  ./google-chrome-stable_current_amd64.deb

@@ -7,6 +7,8 @@ If you do not have pathogen installed, follow the instructions [here](https://gi
 If you're willing to overwrite all of your vim configurations, then just run `./setup_vim.sh`.
 Bask in vim's glory.
 
+Also now includes a bunch of setup scripts.
+
 #### Nice features
 
 - NerdTree: run by typing `:NERDTree` into the vim cmd prompt. Gives you a filetree that you can open other

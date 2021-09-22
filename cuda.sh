@@ -13,8 +13,8 @@ sudo apt-get update
 sudo apt-get -y install cuda
 
 echo
-echo Add the following to /etc/environment:
-echo PATH=/usr/local/cuda-11.4/bin${PATH:+:${PATH}}
+echo Add the following to PATH in /etc/environment:
+echo \t/usr/local/cuda-11.4/bin
 echo Make sure to logout to see any changes. Continue...
 read null
 

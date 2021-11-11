@@ -3,6 +3,7 @@
 # Installation guide can be found here:
 # https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
 
+# Warning - probably out of date by now!
 echo Installing cuda 11.4.2
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-ubuntu2004.pin
 sudo mv cuda-ubuntu2004.pin /etc/apt/preferences.d/cuda-repository-pin-600

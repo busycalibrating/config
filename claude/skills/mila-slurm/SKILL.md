@@ -78,6 +78,36 @@ higher-priority job needs the resources. For jobs longer than a couple
 of hours, the training script should be able to resume from a
 checkpoint. See `checkpointing.md`.
 
+**Per-user QOS caps + running jobs in parallel** (verify with `sacctmgr -n show
+qos format=Name,MaxTRESPU%40,MaxWall` — don't assume). Each QOS caps the TOTAL
+resources you can use *across all your jobs* (per-user); on `main`/`unkillable`
+these equal the per-job caps, so they double as a concurrency limit:
+- `main`: **cpu=8, gpu=2, mem=48G per user** (total). You can run **up to 2 GPU
+  jobs on `main` at once only if you right-size them** — e.g. 2×{4 CPU, 24G, 1
+  GPU} = 8 CPU/48G/2 GPU. Ask for the full 48G (or 8 CPU) on one job and **only
+  that one runs**; the rest sit `PENDING` with `QOSMaxMemoryPerUser` /
+  `QOSMaxCpuPerUserLimit`. The per-user **GPU cap is 2** → `main` never runs >2
+  GPU jobs regardless of memory.
+- `unkillable`: cpu=6, gpu=1, mem=32G per user → effectively **1 GPU job**.
+- `long`: **no per-user TRES cap** → many parallel jobs, but **preemptible**.
+
+So **right-size `--mem`/`--cpus-per-task`** to what the job needs (check a prior
+run's `MaxRSS` via `sacct`) to fit 2 jobs on the non-preemptible `main`; send
+overflow beyond 2 GPU jobs to `long`.
+
+**Preemption × resumability — decide this BEFORE submitting to `long`:**
+- A preempted job is requeued and **restarts from the beginning** unless the
+  workload itself checkpoints/resumes. A long *non-resumable* job on `long` can
+  lose hours to a single preemption.
+- Rule of thumb for ML repos: **training/SFT is usually resumable** (checkpoints)
+  → safe on `long`. **Attack/eval runs (GCG, prefilling, PAIR, sampling) are
+  typically NOT resumable** → a preemption means redoing the whole run. Keep
+  these as short as the experiment allows; put the single most important
+  non-resumable run on the guaranteed `main`/`unkillable` slot and fan the rest
+  out to `long`, ready to re-submit any that get preempted.
+- **If you are not sure whether a specific job is preemptable or resumable, ASK
+  the user** rather than guessing — it determines whether `long` is safe.
+
 ## GPU types
 
 Request a specific GPU model with `--gres=gpu:<model>:<count>`. Valid

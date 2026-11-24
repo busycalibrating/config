@@ -1,4 +1,53 @@
 # Various configurations and scripts for the most optimal<sup>TM</sup> working environment.
+
+
+### General Cluster Stuff
+
+```bash
+# install claude code
+curl -fsSL https://claude.ai/install.sh | bash
+
+# install fish shell
+wget https://github.com/fish-shell/fish-shell/releases/download/4.7.1/fish-4.7.1-linux-x86_64.tar.xz
+tar -xvf 
+```
+
+Update your bashrc to point interactive jobs to fish:
+
+```
+tar -xvf fish-4.7.1-linux-x86_64.tar.xz
+mv fish ~/.local/bin
+```
+
+Fish config
+
+```fish
+if status is-interactive
+    # Commands to run in interactive sessions can go here
+    alias sa='smux attach-session'
+    alias sq='squeue --format="%.20i %.9P %.24j %.16u %.8T %.10M %.9l  %R"'
+    alias btop='$HOME/Programs/btop/bin/btop'
+    alias nvsmi='watch -n 0.1 nvidia-smi'
+    alias watchq="watch -n 5 squeue --me"
+end
+
+# Fix SSH agent forwarding in tmux for fish
+if set -q SSH_AUTH_SOCK; and test "$SSH_AUTH_SOCK" != "$HOME/.ssh/ssh_auth_sock"
+    ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh_auth_sock"
+    set -gx SSH_AUTH_SOCK "$HOME/.ssh/ssh_auth_sock"
+    bind alt-backspace backward-kill-path-component  # for stupid macbook shit
+end
+
+
+set -gx GPG_TTY (tty)
+set -gx HF_HOME <SOMEWHERE SAFE ISH
+set -gx HF_TOKEN <REDACTED>
+set -gx SSL_CERT_DIR '/etc/ssl/certs/'
+set -gx PATH $PATH <PATH_OF_EXTRA_BINS>
+```
+
+
+
 ### Vim stuff
 Contains a `.vimrc` and a `.vim/` folder, and a script to pull relevant plugins.
 Note that this depends on having pathogen installed, which is included in the supplied `.vim/` directory.
